@@ -16,6 +16,7 @@ public class NavItems extends javax.swing.JPanel {
      * Creates new form NavItems
      */
     private boolean selected;
+    private boolean over;
     public NavItems(Nav_model data) {
         initComponents();
         setOpaque(false);
@@ -35,13 +36,21 @@ public class NavItems extends javax.swing.JPanel {
         this.selected = selected;
         repaint();
     }
+    public void setOver(boolean over){
+        this.over = over;
+        repaint();
+    }
 
    public void paintComponent(Graphics grphcs){
-        if(selected){
+        if(selected || over){
             Graphics2D g2 = (Graphics2D)grphcs;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setColor(new Color(255,255,255,80));
-            g2.fillRoundRect(0, 0, getWidth(), getHeight(), 5 ,5);
+            if(selected){
+                g2.setColor(new Color(255,255,255,80));
+            }else{
+                g2.setColor(new Color(255,255,255,20));
+            }
+            g2.fillRoundRect(0, 0, getWidth() - 20, getHeight(), 5 ,5);
         }
         super.paintComponent(grphcs);
     }

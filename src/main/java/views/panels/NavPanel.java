@@ -17,6 +17,14 @@ public class NavPanel extends javax.swing.JPanel {
     /**
      * Creates new form NavPanel
      */
+    
+    private EventMenuSelected event;
+    
+    public void addEventMenuSelected(EventMenuSelected event){
+        this.event = event;
+        listNav1.addEventMenuSelected(event);
+    }
+    
     public NavPanel() {
         initComponents();
         setOpaque(false);

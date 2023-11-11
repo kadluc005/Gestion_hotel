@@ -5,6 +5,7 @@
 package com.mycompany.gestion_hotel;
 
 import views.HomePage;
+import views.Login;
 import views.SplashScreen;
 
 /**
@@ -26,11 +27,11 @@ public class Gestion_hotel {
             }
         }
         screen.setVisible(false);
-        /*Login login = new Login();
-        login.setVisible(true);*/
+        Login login = new Login();
+        login.setVisible(true);
         
-        HomePage home = new HomePage();
-        home.setVisible(true);
+        /*HomePage home = new HomePage();
+        home.setVisible(true);*/
         
     }
 }

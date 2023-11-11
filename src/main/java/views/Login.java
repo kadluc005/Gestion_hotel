@@ -48,6 +48,7 @@ public final class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         txtUser = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
@@ -251,6 +252,7 @@ public final class Login extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         HomePage page = new HomePage();
+        this.setVisible(false);
         page.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -290,6 +292,7 @@ public final class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;

@@ -5,7 +5,9 @@
 package views;
 
 import java.awt.Color;
-import views.panels.NavPanel;
+import javax.swing.JComponent;
+import views.panels.EventMenuSelected;
+import views.selectedItems.*;
 
 
 /**
@@ -17,11 +19,48 @@ public class HomePage extends javax.swing.JFrame {
     /**
      * Creates new form HomePage
      */
+    private Client_view cl = new Client_view();
+    private Chambre_view ch = new Chambre_view();
+    private Reservation_view rsvt = new Reservation_view();
+    private Paiement_view pmt = new Paiement_view();
+    private Divers_view dvrs = new Divers_view();
+    private Admin_view admin = new Admin_view();
+    
     public HomePage() {
         initComponents();
         setBackground(new Color(0,0,0,0));
         //NavPanel.iniMoving(HomePage.this);
         //this.setExtendedState(HomePage.MAXIMIZED_BOTH);
+        navPanel.addEventMenuSelected(new EventMenuSelected(){
+            @Override
+            public void selected(int index) {
+                if(index == 0){
+                    
+                }else if(index == 1){
+                    setForm(cl);
+                }else if(index == 2){
+                    setForm(ch);
+                }else if(index == 3){
+                    setForm(rsvt);
+                }else if(index == 4){
+                    setForm(pmt);
+                }else if(index == 5){
+                    setForm(dvrs);
+                }else if(index == 6){
+                    setForm(admin);
+                }else if(index == 7){
+                    
+                }
+            }
+        });
+        setForm(new Client_view());
+    }
+    
+    private void setForm(JComponent com){
+        mainPanel.removeAll();
+        mainPanel.add(com);
+        mainPanel.repaint();
+        mainPanel.revalidate();
     }
 
     /**
@@ -34,37 +73,45 @@ public class HomePage extends javax.swing.JFrame {
     private void initComponents() {
 
         basePanel2 = new views.panels.BasePanel();
-        navPanel1 = new views.panels.NavPanel();
+        navPanel = new views.panels.NavPanel();
+        mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         basePanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        navPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        navPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                navPanel1MouseClicked(evt);
+                navPanelMouseClicked(evt);
             }
         });
+
+        mainPanel.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout basePanel2Layout = new javax.swing.GroupLayout(basePanel2);
         basePanel2.setLayout(basePanel2Layout);
         basePanel2Layout.setHorizontalGroup(
             basePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(basePanel2Layout.createSequentialGroup()
-                .addComponent(navPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 654, Short.MAX_VALUE))
+                .addComponent(navPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         basePanel2Layout.setVerticalGroup(
             basePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(navPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(navPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(basePanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(basePanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,9 +122,9 @@ public class HomePage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void navPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_navPanel1MouseClicked
+    private void navPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_navPanelMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_navPanel1MouseClicked
+    }//GEN-LAST:event_navPanelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -113,9 +160,11 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private views.panels.BasePanel basePanel2;
-    private views.panels.NavPanel navPanel1;
+    private javax.swing.JPanel mainPanel;
+    private views.panels.NavPanel navPanel;
     // End of variables declaration//GEN-END:variables
 }
