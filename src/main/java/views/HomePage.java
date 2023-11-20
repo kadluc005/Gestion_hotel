@@ -6,6 +6,7 @@ package views;
 
 import java.awt.Color;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import views.panels.EventMenuSelected;
 import views.selectedItems.*;
 
@@ -48,8 +49,13 @@ public class HomePage extends javax.swing.JFrame {
                     setForm(dvrs);
                 }else if(index == 6){
                     setForm(admin);
-                }else if(index == 7){
-                    
+                }else if(index == 8){
+                    int choix = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment vous déconnecter?", "Déconnexion", JOptionPane.YES_NO_OPTION);
+                    if(choix == JOptionPane.YES_OPTION){
+                        HomePage.super.dispose();
+                        Login lg = new Login();
+                        lg.setVisible(true);
+                    }
                 }
             }
         });

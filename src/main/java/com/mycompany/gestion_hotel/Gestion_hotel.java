@@ -26,7 +26,7 @@ public class Gestion_hotel {
             }catch(Exception e){
             }
         }
-        screen.setVisible(false);
+        screen.dispose();
         Login login = new Login();
         login.setVisible(true);
         

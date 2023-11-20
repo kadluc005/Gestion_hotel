@@ -38,7 +38,7 @@ public class Admin_view extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
                 .addGap(43, 43, 43))
         );
         layout.setVerticalGroup(
@@ -46,7 +46,7 @@ public class Admin_view extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(193, 193, 193)
                 .addComponent(jLabel1)
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addContainerGap(265, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

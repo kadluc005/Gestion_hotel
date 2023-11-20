@@ -18,7 +18,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="181" max="-2" attributes="0"/>
-              <Component id="jLabel1" pref="332" max="32767" attributes="0"/>
+              <Component id="jLabel1" pref="574" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -28,7 +28,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="193" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="211" max="32767" attributes="0"/>
+              <EmptySpace pref="265" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

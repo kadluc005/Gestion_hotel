@@ -6,6 +6,10 @@ package views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.*;
+
 
 /**
  *
@@ -251,9 +255,30 @@ public final class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        HomePage page = new HomePage();
-        this.setVisible(false);
-        page.setVisible(true);
+        
+        String username = txtUser.getText();
+        String password = txtPassword.getText();
+        String query = "SELECT * FROM users WHERE username=? AND userpassword=?";
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelbd", "root", "");
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                HomePage page = new HomePage();
+                this.dispose();
+                page.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this, "Identifiant ou mot de passe erroné. Veillez reprendre", "Erreur de connexion", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+           System.out.println(""+ex.getMessage());
+        }
+        
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
