@@ -7,6 +7,7 @@ package controlers;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import models.Client_model;
+import views.selectedItems.Client_view;
 
 /**
  *
@@ -16,7 +17,7 @@ public class Client_controller {
     
     public static void ajouterClient(Client_model cl){
         String sql="INSERT INTO clients (nom_client, prenom_client, tel_client, pays_client, categorie_client, carte_fidelite) VALUES (?,?,?,?,?,?); ";
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelbd", "root", "");
+        try(Connection conn = DbConnection.getConnection();
                 PreparedStatement stmt=conn.prepareStatement(sql)){
             
             stmt.setString(1,cl.getNom_client());
@@ -30,20 +31,18 @@ public class Client_controller {
           
             if (rowsAffected>0){
                 JOptionPane.showMessageDialog(null,"Ajouté avec succès");
-               // String []gestion_notes={"id_etudiant","nom","prenom","age","tel","matiere","notes"};
-                //table(tableau,gestion_notes,"SELECT * FROM notes");
             }else{
                 JOptionPane.showMessageDialog(null,"Erreur lors de l'ajout");
             }
             
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Erreur lors de l'ajout "+e.getMessage());
+            System.out.println("Erreur lors de l'ajout "+e.getMessage());
         }
     }
     
     public static void modifierClient(Client_model cl, String txt_id){
-        String sql="UPDATE clients SET nom_client = ?, prenom_client = ?, tel_client = ?, pays_client = ?, categoris_client = ?, carte_fidelite = ? WHERD id_client = ?;";
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelbd", "root", "");
+        String sql="UPDATE clients SET nom_client = ?, prenom_client = ?, tel_client = ?, pays_client = ?, categorie_client = ?, carte_fidelite = ? WHERE id_client = ?;";
+        try(Connection conn = DbConnection.getConnection();
                 PreparedStatement stmt=conn.prepareStatement(sql)){
             
             stmt.setString(1,cl.getNom_client());
@@ -58,12 +57,11 @@ public class Client_controller {
             int choix = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment modifier?", "Modifier", JOptionPane.YES_NO_OPTION);
             if(choix == JOptionPane.YES_OPTION){
                 rowsAffected=stmt.executeUpdate();
+                new Client_view().table();
             }
             
             if (rowsAffected>0){
-                JOptionPane.showMessageDialog(null,"Ajouté avec succès");
-               // String []gestion_notes={"id_etudiant","nom","prenom","age","tel","matiere","notes"};
-                //table(tableau,gestion_notes,"SELECT * FROM notes");
+                JOptionPane.showMessageDialog(null,"Modifié avec succès", "Succès" , JOptionPane.INFORMATION_MESSAGE);
             }else{
                 JOptionPane.showMessageDialog(null,"Erreur lors de la modification");
             }
@@ -74,7 +72,7 @@ public class Client_controller {
     }
     public static void supprimerClient(String txt_id){
         String sql="DELETE FROM clients WHERE id_client = ?; ";
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelbd", "root", "");
+        try(Connection conn = DbConnection.getConnection();
                 PreparedStatement stmt=conn.prepareStatement(sql)){
             
             stmt.setString(1,txt_id);
@@ -83,14 +81,15 @@ public class Client_controller {
             int choix = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment supprimer?", "Supprimer", JOptionPane.YES_NO_OPTION);
             if(choix == JOptionPane.YES_OPTION){
                 rowsAffected=stmt.executeUpdate();
+                new Client_view().table();
+            }else{
+                
             }
           
             if (rowsAffected>0){
-                JOptionPane.showMessageDialog(null,"Ajouté avec succès");
-               // String []gestion_notes={"id_etudiant","nom","prenom","age","tel","matiere","notes"};
-                //table(tableau,gestion_notes,"SELECT * FROM notes");
+                JOptionPane.showMessageDialog(null,"Supprimé avec succès", "Succès", JOptionPane.INFORMATION_MESSAGE);
             }else{
-                JOptionPane.showMessageDialog(null,"Erreur lors de l'ajout");
+                JOptionPane.showMessageDialog(null,"Erreur lors de la suppression");
             }
             
         }catch(Exception e){

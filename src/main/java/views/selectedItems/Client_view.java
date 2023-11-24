@@ -5,6 +5,10 @@
 package views.selectedItems;
 
 import controlers.Client_controller;
+import controlers.DbConnection;
+import java.sql.*;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import models.Client_model;
 import views.Login;
 
@@ -19,6 +23,7 @@ public class Client_view extends javax.swing.JPanel {
      */
     public Client_view() {
         initComponents();
+        table();
     }
 
     /**
@@ -32,7 +37,7 @@ public class Client_view extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tableClient = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         txtNom = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -40,15 +45,15 @@ public class Client_view extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         txtTel = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtPays = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtCF = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jTextField7 = new javax.swing.JTextField();
         comboCat = new javax.swing.JComboBox<>();
+        comboCF = new javax.swing.JComboBox<>();
+        comboPays = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -57,18 +62,21 @@ public class Client_view extends javax.swing.JPanel {
         jLabel1.setText("Clients");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tableClient.setFont(new java.awt.Font("Segoe UI Historic", 0, 13)); // NOI18N
+        tableClient.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
+
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        tableClient.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tableClientMouseReleased(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tableClient);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
         jLabel2.setText("Nom");
@@ -88,15 +96,11 @@ public class Client_view extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
         jLabel5.setText("Pays");
 
-        txtPays.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
-
         jLabel6.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
         jLabel6.setText("Catégorie");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
         jLabel7.setText("CF");
-
-        txtCF.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(0, 0, 102));
         jButton1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
@@ -112,11 +116,21 @@ public class Client_view extends javax.swing.JPanel {
         jButton2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Modifier");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(0, 0, 102));
         jButton3.setFont(new java.awt.Font("Segoe UI Emoji", 1, 18)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Supprimer");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jTextField7.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         jTextField7.setText("Rechercher");
@@ -128,6 +142,12 @@ public class Client_view extends javax.swing.JPanel {
 
         comboCat.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
         comboCat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "privé", "affaire", "groupe", "TOP", "VIP" }));
+
+        comboCF.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
+        comboCF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Non", "Oui" }));
+
+        comboPays.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
+        comboPays.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bénin", "Burkina Faso", "Cameroun", "Cap-Vert", "Côte d'Ivoire", "Gabon", "Gambie", "Ghana", "Guinée", "Guinée-Bissau", "Libéria", "Mali", "Mauritanie", "Niger", "Nigeria", "Sénégal", "Sierra Leone", "Togo" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -155,19 +175,20 @@ public class Client_view extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPays, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(comboPays, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(comboCat, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCF, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(46, 46, 46)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(52, 52, 52)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboCF, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -190,6 +211,9 @@ public class Client_view extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNom, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -203,22 +227,21 @@ public class Client_view extends javax.swing.JPanel {
                             .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPays, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(comboPays, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(comboCat, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCF, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel6)
+                                .addGap(22, 22, 22))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(comboCat)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(comboCF, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,19 +258,94 @@ public class Client_view extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Client_model cl = new Client_model(txtNom.getText(), txtPrenom.getText(), txtTel.getText(), txtPays.getText(), (String) comboCat.getSelectedItem(), txtCF.getText());
+        Client_model cl = new Client_model(txtNom.getText(), txtPrenom.getText(), txtTel.getText(), (String) comboPays.getSelectedItem(), (String) comboCat.getSelectedItem(), (String) comboCF.getSelectedItem());
         Client_controller.ajouterClient(cl);
+        table();
         txtNom.setText("");
         txtPrenom.setText("");
         txtTel.setText("");
-        txtPays.setText(""); 
-        comboCat.setSelectedItem(0);
-        txtCF.setText("");
+        comboPays.setSelectedIndex(0); 
+        comboCat.setSelectedIndex(0);
+        comboCF.setSelectedIndex(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void tableClientMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableClientMouseReleased
+        int i=tableClient.getSelectedRow();
+        DefaultTableModel model=(DefaultTableModel) tableClient.getModel();
+        txtNom.setText((String) model.getValueAt(i,1));
+        txtPrenom.setText((String) model.getValueAt(i, 2));
+        txtTel.setText((String) model.getValueAt(i, 3));
+        comboPays.setSelectedItem((String) model.getValueAt(i, 4));
+        comboCat.setSelectedItem((String) model.getValueAt(i, 5));
+        comboCF.setSelectedItem((String) model.getValueAt(i, 6));
+    }//GEN-LAST:event_tableClientMouseReleased
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int index = tableClient.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tableClient.getModel();
+        String id = model.getValueAt(index, 0).toString();
+        Client_model cl = new Client_model(txtNom.getText(), txtPrenom.getText(), txtTel.getText(), (String) comboPays.getSelectedItem(), (String) comboCat.getSelectedItem(), (String) comboCF.getSelectedItem());
+        Client_controller.modifierClient(cl,id);
+        table();
+        txtNom.setText("");
+        txtPrenom.setText("");
+        txtTel.setText("");
+        comboPays.setSelectedIndex(0); 
+        comboCat.setSelectedIndex(0);
+        comboCF.setSelectedIndex(0);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int index = tableClient.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tableClient.getModel();
+        String id = model.getValueAt(index, 0).toString();
+        Client_controller.supprimerClient(id);
+        table();
+        txtNom.setText("");
+        txtPrenom.setText("");
+        txtTel.setText("");
+        comboPays.setSelectedIndex(0); 
+        comboCat.setSelectedIndex(0);
+        comboCF.setSelectedIndex(0);
+        String querry = "ALTER TABLE clients AUTO_INCREMENT = 0;";
+        try{
+            Connection conn = DbConnection.getConnection();
+            Statement stmt=conn.createStatement();
+            stmt.executeUpdate(querry);
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null,e.getMessage()); 
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    public void table(){
+        String []clients={"id","nom","prenom","tel","pays", "categorie","carte"}; 
+        String []afficher=new String[7];
+        
+        DefaultTableModel model=new DefaultTableModel(null,clients);
+        try{
+            Connection conn= DbConnection.getConnection();
+            Statement stmt=conn.createStatement();
+            ResultSet rs=stmt.executeQuery("SELECT* FROM clients;");
+            while(rs.next()){
+                afficher[0]=rs.getString("id_client");
+                afficher[1]=rs.getString("nom_client");
+                afficher[2]=rs.getString("prenom_client");
+                afficher[3]=rs.getString("tel_client");
+                afficher[4]=rs.getString("pays_client");
+                afficher[5]=rs.getString("categorie_client");
+                afficher[6]=rs.getString("carte_fidelite");
+                model.addRow(afficher);
+                tableClient.setModel(model);
+            }
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null,"Erreur "+e.getMessage());
+        }
+    } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> comboCF;
     private javax.swing.JComboBox<String> comboCat;
+    private javax.swing.JComboBox<String> comboPays;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -259,11 +357,9 @@ public class Client_view extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField txtCF;
+    private javax.swing.JTable tableClient;
     public javax.swing.JTextField txtNom;
-    private javax.swing.JTextField txtPays;
     private javax.swing.JTextField txtPrenom;
     private javax.swing.JTextField txtTel;
     // End of variables declaration//GEN-END:variables

@@ -10,36 +10,12 @@ import java.sql.*;
  * @author hp
  */
 public class DbConnection {
-    private String url = "jdbc:mysql://localhost:3306/hoteldb";
-    private String username = "root";
-    private String password = "";
 
-   
-    public String getUrl() {
-        return url;
-    }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
-    public Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException {
+        String url = "jdbc:mysql://localhost:3306/hotelbd";
+        String username = "root";
+         String password = "";
         return DriverManager.getConnection(url, username, password);
     }
 }
