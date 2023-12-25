@@ -269,9 +269,10 @@ public final class Login extends javax.swing.JFrame {
         
         String username = txtUser.getText();
         String password = txtPassword.getText();
+        
         String query = "SELECT * FROM users WHERE username=? AND userpassword=?";
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotelbd", "root", "");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hoteldb", "root", "");
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, username);
             stmt.setString(2, password);

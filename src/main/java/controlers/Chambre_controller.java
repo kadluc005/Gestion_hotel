@@ -37,7 +37,7 @@ public class Chambre_controller {
 
     public static void modifierChambre(Chambre_model ch, String id_ch){
         try(Connection conn = DbConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement("UPDATE chambres SET type_chambre = ?, situation_chambre = ?, prix_chambre = ? WHERE id_chambre = ?")){
+                PreparedStatement stmt = conn.prepareStatement("UPDATE chambres SET type_chambre = ?, situation_chambre = ?, prix_chambre = ? WHERE id_chambre = ?;")){
             
             stmt.setString(1, ch.getType_chambre());
             stmt.setString(2, ch.getStuation_chambre());

@@ -196,6 +196,7 @@ public class Chambre_view extends javax.swing.JPanel {
         Float price = Float.valueOf(txtprice.getText());
         Chambre_model ch = new Chambre_model((String) combotype.getSelectedItem(), (String) combosituation.getSelectedItem(), price);
         Chambre_controller.ajouterChambre(ch);
+        tablech();
         combotype.setSelectedIndex(0);
         combosituation.setSelectedIndex(0);
         txtprice.setText("");
@@ -208,6 +209,7 @@ public class Chambre_view extends javax.swing.JPanel {
         Float price = Float.valueOf(txtprice.getText());
         Chambre_model ch = new Chambre_model((String) combotype.getSelectedItem(), (String) combosituation.getSelectedItem(), price);
         Chambre_controller.modifierChambre(ch, id);
+        tablech();
         combotype.setSelectedIndex(0);
         combosituation.setSelectedIndex(0);
         txtprice.setText("");
@@ -218,6 +220,7 @@ public class Chambre_view extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tableChambre.getModel();
         String id = model.getValueAt(index, 0).toString();
         Chambre_controller.supprimerChambre(id);
+        tablech();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void tableChambreMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableChambreMouseReleased
@@ -229,27 +232,27 @@ public class Chambre_view extends javax.swing.JPanel {
     }//GEN-LAST:event_tableChambreMouseReleased
 
     public void tablech(){
-            String []chambres={"num","Type des chambre","Situation", "Prix"}; 
-            String []afficher=new String[5];
+        String []chambres={"num","Type des chambre","Situation", "Prix"}; 
+        String []afficher=new String[5];
 
-            DefaultTableModel model=new DefaultTableModel(null,chambres);
-            try{
-                Connection conn= DbConnection.getConnection();
-                Statement stmt=conn.createStatement();
-                ResultSet rs=stmt.executeQuery("SELECT* FROM chambres;");
-                while(rs.next()){
-                    afficher[0]=rs.getString("id_chambre"); 	 	 	
-                    afficher[1]=rs.getString("type_chambre");
-                    afficher[2]=rs.getString("situation_chambre");
-                    afficher[3]=rs.getString("prix_chambre");
+        DefaultTableModel model=new DefaultTableModel(null,chambres);
+        try{
+            Connection conn= DbConnection.getConnection();
+            Statement stmt=conn.createStatement();
+            ResultSet rs=stmt.executeQuery("SELECT* FROM chambres;");
+            while(rs.next()){
+                afficher[0]=rs.getString("id_chambre"); 	 	 	
+                afficher[1]=rs.getString("type_chambre");
+                afficher[2]=rs.getString("situation_chambre");
+                afficher[3]=rs.getString("prix_chambre");
 
-                    model.addRow(afficher);
-                    tableChambre.setModel(model);
-                }
-            }catch(SQLException e){
-                JOptionPane.showMessageDialog(null,"Erreur "+e.getMessage());
+                model.addRow(afficher);
+                tableChambre.setModel(model);
             }
-        } 
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null,"Erreur "+e.getMessage());
+        }
+    } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> combosituation;

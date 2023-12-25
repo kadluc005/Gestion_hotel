@@ -13,7 +13,7 @@ public class DbConnection {
 
 
     public static Connection getConnection() throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/hotelbd";
+        String url = "jdbc:mysql://localhost:3306/hoteldb";
         String username = "root";
          String password = "";
         return DriverManager.getConnection(url, username, password);

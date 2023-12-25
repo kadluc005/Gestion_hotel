@@ -11,11 +11,11 @@ package models;
 public class Reservation_model {
     private String date_arrivee ;
     private String date_depart ;
-    private String id_client ;
-    private String id_chambre ;
+    private int id_client ;
+    private int id_chambre ;
     private String etat_reservation; 	
 
-    public Reservation_model(String date_arrivee, String date_depart, String id_client, String id_chambre, String etat_reservation) {
+    public Reservation_model(String date_arrivee, String date_depart, int id_client, int id_chambre, String etat_reservation) {
         this.date_arrivee = date_arrivee;
         this.date_depart = date_depart;
         this.id_client = id_client;
@@ -42,19 +42,19 @@ public class Reservation_model {
         this.date_depart = date_depart;
     }
 
-    public String getId_client() {
+    public int getId_client() {
         return id_client;
     }
 
-    public void setId_client(String id_client) {
+    public void setId_client(int id_client) {
         this.id_client = id_client;
     }
 
-    public String getId_chambre() {
+    public int getId_chambre() {
         return id_chambre;
     }
 
-    public void setId_chambre(String id_chambre) {
+    public void setId_chambre(int id_chambre) {
         this.id_chambre = id_chambre;
     }
 

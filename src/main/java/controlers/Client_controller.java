@@ -57,7 +57,6 @@ public class Client_controller {
             int choix = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment modifier?", "Modifier", JOptionPane.YES_NO_OPTION);
             if(choix == JOptionPane.YES_OPTION){
                 rowsAffected=stmt.executeUpdate();
-                new Client_view().table();
             }
             
             if (rowsAffected>0){
@@ -81,9 +80,6 @@ public class Client_controller {
             int choix = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment supprimer?", "Supprimer", JOptionPane.YES_NO_OPTION);
             if(choix == JOptionPane.YES_OPTION){
                 rowsAffected=stmt.executeUpdate();
-                new Client_view().table();
-            }else{
-                
             }
           
             if (rowsAffected>0){

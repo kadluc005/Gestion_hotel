@@ -6,8 +6,10 @@ views\panels\Nav_model$MenuType.class
 views\selectedItems\Reservation_view$1.class
 views\Login$7.class
 views\selectedItems\Client_view$4.class
+views\selectedItems\Chambre_view$4.class
 views\Login.class
 views\selectedItems\Admin_view.class
+views\selectedItems\Chambre_view$5.class
 views\panels\ListNav.class
 views\panels\NavPanel$2.class
 models\Reservation_model.class
@@ -33,7 +35,10 @@ views\panels\NavItems.class
 views\selectedItems\Client_view$3.class
 views\Login$5.class
 views\selectedItems\Divers_view$1.class
+views\selectedItems\Reservation_view$2.class
+views\selectedItems\Chambre_view$2.class
 com\mycompany\gestion_hotel\Gestion_hotel.class
+controlers\Reservation_controller.class
 views\selectedItems\Divers_view.class
 views\Login$8.class
 views\SplashScreen.class
@@ -46,6 +51,7 @@ controlers\Client_controller.class
 models\Chambre_model.class
 views\Login$10.class
 views\Login$4.class
+views\selectedItems\Chambre_view$3.class
 views\selectedItems\Client_view$2.class
 controlers\DbConnection.class
 views\Login$1.class
