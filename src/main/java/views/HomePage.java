@@ -7,6 +7,7 @@ package views;
 import java.awt.Color;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import views.panels.EventMenuSelected;
 import views.selectedItems.*;
 
@@ -22,6 +23,7 @@ public class HomePage extends javax.swing.JFrame {
      */
     private Client_view cl = new Client_view();
     private Chambre_view ch = new Chambre_view();
+    private Chambre_view_admin cha = new Chambre_view_admin();
     private Reservation_view rsvt = new Reservation_view();
     private Paiement_view pmt = new Paiement_view();
     private Divers_view dvrs = new Divers_view();
@@ -46,9 +48,18 @@ public class HomePage extends javax.swing.JFrame {
                 }else if(index == 4){
                     setForm(pmt);
                 }else if(index == 5){
-                    setForm(dvrs);
+                    setForm(cha);
                 }else if(index == 6){
-                    setForm(admin);
+                    JPasswordField admin_mdp = new JPasswordField();
+
+                    int option = JOptionPane.showConfirmDialog(null, admin_mdp, "Entrez le mot de passe administrateur", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+                    if(option == JOptionPane.OK_OPTION){
+                        if(admin_mdp.getText().equals("00")){
+                            setForm(admin);
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Le mot de passe est erroné");
+                        }
+                    } 
                 }else if(index == 8){
                     int choix = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment vous déconnecter?", "Déconnexion", JOptionPane.YES_NO_OPTION);
                     if(choix == JOptionPane.YES_OPTION){
@@ -65,8 +76,8 @@ public class HomePage extends javax.swing.JFrame {
     private void setForm(JComponent com){
         mainPanel.removeAll();
         mainPanel.add(com);
-        mainPanel.repaint();
         mainPanel.revalidate();
+        mainPanel.repaint();     
     }
 
     /**
@@ -170,7 +181,7 @@ public class HomePage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private views.panels.BasePanel basePanel2;
-    private javax.swing.JPanel mainPanel;
+    public javax.swing.JPanel mainPanel;
     private views.panels.NavPanel navPanel;
     // End of variables declaration//GEN-END:variables
 }
