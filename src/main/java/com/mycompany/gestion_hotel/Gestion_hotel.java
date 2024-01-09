@@ -15,8 +15,8 @@ import views.SplashScreen;
 public class Gestion_hotel {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        SplashScreen screen = new SplashScreen();
+        
+        /*SplashScreen screen = new SplashScreen();
         screen.setVisible(true);
         
         for(int i=0; i<=100;i++){
@@ -28,10 +28,10 @@ public class Gestion_hotel {
         }
         screen.dispose();
         Login login = new Login();
-        login.setVisible(true);
+        login.setVisible(true);*/
         
-        /*HomePage home = new HomePage();
-        home.setVisible(true);*/
+        HomePage home = new HomePage();
+        home.setVisible(true);
         
     }
 }

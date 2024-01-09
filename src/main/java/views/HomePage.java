@@ -21,18 +21,25 @@ public class HomePage extends javax.swing.JFrame {
     /**
      * Creates new form HomePage
      */
-    private Client_view cl = new Client_view();
-    private Chambre_view ch = new Chambre_view();
-    private Chambre_view_admin cha = new Chambre_view_admin();
-    private Reservation_view rsvt = new Reservation_view();
-    private Paiement_view pmt = new Paiement_view();
-    private Divers_view dvrs = new Divers_view();
-    private Admin_view admin = new Admin_view();
+    private Client_view cl;
+    private Chambre_view ch;
+    private Chambre_view_admin cha;
+    private Reservation_view rsvt;
+    private Paiement_view pmt;
+    private Divers_view dvrs;
+    private Admin_view admin;
     
     public HomePage() {
         initComponents();
         setBackground(new Color(0,0,0,0));
-        //NavPanel.iniMoving(HomePage.this);
+        cl = new Client_view();
+        ch = new Chambre_view();
+        cha = new Chambre_view_admin();
+        rsvt = new Reservation_view();
+        pmt = new Paiement_view();
+        dvrs = new Divers_view();
+        admin = new Admin_view();
+        //NavPanel.initMoving(HomePage.this);
         //this.setExtendedState(HomePage.MAXIMIZED_BOTH);
         navPanel.addEventMenuSelected(new EventMenuSelected(){
             @Override
@@ -42,13 +49,13 @@ public class HomePage extends javax.swing.JFrame {
                 }else if(index == 1){
                     setForm(cl);
                 }else if(index == 2){
-                    setForm(ch);
+                    setForm(cha);
                 }else if(index == 3){
                     setForm(rsvt);
                 }else if(index == 4){
                     setForm(pmt);
                 }else if(index == 5){
-                    setForm(cha);
+                    setForm(dvrs);
                 }else if(index == 6){
                     JPasswordField admin_mdp = new JPasswordField();
 
@@ -60,12 +67,13 @@ public class HomePage extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Le mot de passe est erroné");
                         }
                     } 
-                }else if(index == 8){
+                }else if(index == 7){
                     int choix = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment vous déconnecter?", "Déconnexion", JOptionPane.YES_NO_OPTION);
                     if(choix == JOptionPane.YES_OPTION){
-                        HomePage.super.dispose();
+                        /*HomePage.super.dispose();
                         Login lg = new Login();
-                        lg.setVisible(true);
+                        lg.setVisible(true);*/
+                        System.exit(0);
                     }
                 }
             }
@@ -104,6 +112,7 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
 
+        mainPanel.setBackground(new java.awt.Color(255, 255, 255));
         mainPanel.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout basePanel2Layout = new javax.swing.GroupLayout(basePanel2);

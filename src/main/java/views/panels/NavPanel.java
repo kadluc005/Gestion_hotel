@@ -39,7 +39,7 @@ public class NavPanel extends javax.swing.JPanel {
         listNav1.addItem(new Nav_model("réservations", "reservation.png", Nav_model.MenuType.MENU));
         listNav1.addItem(new Nav_model("Paiement", "paiement.png", Nav_model.MenuType.MENU));
         listNav1.addItem(new Nav_model("Divers", "eat.png", Nav_model.MenuType.MENU));
-        listNav1.addItem(new Nav_model("Admin", "admin.png", Nav_model.MenuType.MENU));
+        //listNav1.addItem(new Nav_model("Admin", "admin.png", Nav_model.MenuType.MENU));
         listNav1.addItem(new Nav_model("", "", Nav_model.MenuType.EMPTY));
         listNav1.addItem(new Nav_model("Se déconnecter", "", Nav_model.MenuType.MENU));
     }
