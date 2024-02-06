@@ -8,8 +8,12 @@ import controlers.*;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import models.Reservation_model;
 
 /**
@@ -52,6 +56,7 @@ public class Reservation_view extends javax.swing.JPanel {
         jTextField7 = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -127,16 +132,23 @@ public class Reservation_view extends javax.swing.JPanel {
         });
 
         jTextField7.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
-        jTextField7.setText("Rechercher");
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField7ActionPerformed(evt);
+            }
+        });
+        jTextField7.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField7KeyReleased(evt);
             }
         });
 
         jDateChooser1.setDateFormatString("yyyy-MM-dd");
 
         jDateChooser2.setDateFormatString("yyyy-MM-dd");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI Emoji", 1, 14)); // NOI18N
+        jLabel7.setText("Rechercher");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -183,7 +195,9 @@ public class Reservation_view extends javax.swing.JPanel {
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(15, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(226, 226, 226)
+                .addGap(116, 116, 116)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jTextField7)
                 .addGap(330, 330, 330))
         );
@@ -221,7 +235,9 @@ public class Reservation_view extends javax.swing.JPanel {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -285,9 +301,6 @@ public class Reservation_view extends javax.swing.JPanel {
         } catch (ParseException e) {
             e.printStackTrace(); // Gérez l'exception selon vos besoins
         }
-        
-        //jDateChooser1.setDate(parse((String) model.getValueAt(i, 1).toString()));
-        //jDateChooser2.setDate(parse((String) model.getValueAt(i, 2).toString()));
         txt_cli.setText((String) model.getValueAt(i,3));
         txt_ch.setText((String) model.getValueAt(i, 4));
         txt_etat.setText((String) model.getValueAt(i,5));
@@ -308,8 +321,19 @@ public class Reservation_view extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jTextField7KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyReleased
+        DefaultTableModel model = (DefaultTableModel) table_reserv.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        table_reserv.setRowSorter(sorter);
+
+        List<RowFilter<Object, Object>> filters = new ArrayList<>();
+        filters.add(RowFilter.regexFilter(jTextField7.getText(), 1)); // Colonne 1 contient le client   
+        RowFilter<Object, Object> combinedFilter = RowFilter.andFilter(filters);
+        sorter.setRowFilter(combinedFilter);
+    }//GEN-LAST:event_jTextField7KeyReleased
+
     public void table(){
-        String []reservations={"id","date d'arrivée","date de départ","client","chambre", "etat de reservation"}; 
+        String []reservations={"Matricule","date d'arrivée","date de départ","client","chambre", "etat de reservation"}; 
         String []afficher=new String[6];
         
         DefaultTableModel model=new DefaultTableModel(null,reservations);
@@ -345,6 +369,7 @@ public class Reservation_view extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTable table_reserv;

@@ -11,13 +11,11 @@ package models;
 public class Chambre_model {
     private String  type_chambre;
     private String  situation_chambre;
-    private String  localisation;
     private float  prix_chambre;
 
-    public Chambre_model(String type_chambre, String situation_chambre, String localisation, float prix_chambre) {
+    public Chambre_model(String type_chambre, String situation_chambre, float prix_chambre) {
         this.type_chambre = type_chambre;
         this.situation_chambre = situation_chambre;
-        this.localisation = localisation;
         this.prix_chambre = prix_chambre;
     }
     
@@ -38,14 +36,6 @@ public class Chambre_model {
 
     public void setSituation_chambre(String stuation_chambre) {
         this.situation_chambre = situation_chambre;
-    }
-    
-    public String getLocalisation(){
-        return localisation;
-    }
-    
-    public void setLocalisation(String localisation){
-        this.localisation = localisation;
     }
 
     public float getPrix_chambre() {

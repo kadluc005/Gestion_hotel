@@ -4,6 +4,25 @@
  */
 package views.selectedItems;
 
+import controlers.DbConnection;
+import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+
 /**
  *
  * @author hp
@@ -26,45 +45,278 @@ public class Paiement_view extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txt_reserv = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        total_label = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 0, 51));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Paiement");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
+        jLabel2.setText("Reservation No");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
+        jLabel3.setText("Mode de paiement");
+
+        txt_reserv.setFont(new java.awt.Font("Segoe UI Emoji", 0, 16)); // NOI18N
+
+        jComboBox1.setFont(new java.awt.Font("Segoe UI Emoji", 0, 16)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Espèce", "Chèque", "Carte bancaire" }));
+
+        jButton1.setBackground(new java.awt.Color(153, 153, 153));
+        jButton1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 16)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Effectuer");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        });
+
+        total_label.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
+        total_label.setForeground(new java.awt.Color(102, 0, 51));
+        total_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        total_label.setText("Total:");
+        total_label.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jButton2.setBackground(new java.awt.Color(153, 153, 153));
+        jButton2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 16)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Annuler");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(204, 0, 0));
+        jButton3.setFont(new java.awt.Font("Segoe UI Emoji", 1, 16)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Imprimer la facture");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(88, 425, Short.MAX_VALUE)
+                .addComponent(total_label, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(240, 240, 240))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(318, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel2)
+                        .addGap(37, 37, 37))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(txt_reserv, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(374, 374, 374))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(153, 153, 153)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
+                .addComponent(jButton3)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_reserv, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addComponent(total_label, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(117, 117, 117)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(128, 128, 128))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        System.out.println(getNom_client());
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        imprimerFactureSelectionnee();
+        //print();
+//        try{
+//            String url="jdbc:mysql://localhost:3306/notes";
+//            String username = "root";
+//            String password = "";
+//            Connection conn = DriverManager.getConnection(url,username, password);
+//            JasperDesign jDesign = JRXmlLoader.load("C:\\Users\\hp\\JaspersoftWorkspace\\FactureHotel\\FactureHotel.jrxml");
+//            String query = "SELECT * FROM notes";
+//            JRDesignQuery updateQuery = new JRDesignQuery();
+//            updateQuery.setText(query);
+//            jDesign.setQuery(updateQuery);
+//            
+//            JasperReport jreport = JasperCompileManager.compileReport(jDesign);
+//            JasperPrint jprint = JasperFillManager.fillReport(jreport, null, conn);
+//            JasperViewer.viewReport(jprint);
+//         
+//        }catch(JRException e){
+//            System.out.println(e.getMessage());
+//        } catch (SQLException ex) {
+//            //Logger.getLogger(Print.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+   private void imprimerFactureSelectionnee() {
+        // Récupérer les données de la facture sélectionnée depuis votre modèle de table
+        String url="jdbc:mysql://localhost:3306/hoteldb";
+        String username = "root";
+        String password = "";
+        
+        try {
+            Connection conn = DriverManager.getConnection(url,username, password);
+            // Charger le fichier .jrxml
+            JasperReport jasperReport = JasperCompileManager.compileReport("C:\\Users\\hp\\JaspersoftWorkspace\\FactureHotel\\facture_hotel.jrxml");
+
+            // Créer une source de données (paramètres)
+            Map<String, Object> parameters = new HashMap<>();
+            // Ajouter les paramètres nécessaires avec les données de la facture
+            parameters.put("id_reservation", Integer.parseInt(txt_reserv.getText()));
+            // Remplir le rapport avec les données
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters,conn);
+
+            // Afficher le rapport
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+ 
+   public void print(){
+       try{
+           String url="jdbc:mysql://localhost:3306/hoteldb";
+            String username = "root";
+            String password = "";
+            Connection conn = DriverManager.getConnection(url,username, password);
+            JasperDesign jDesign = JRXmlLoader.load("C:\\Users\\hp\\JaspersoftWorkspace\\FactureHotel\\facture_hotel.jrxml");
+          String query = "SELECT clients.nom_client AS 'Nom', clients.prenom_client AS 'prenom', DATEDIFF(reservation.date_depart, reservation.date_arrivee) AS 'Séjour', chambres.id_chambre AS 'Chambre',chambres.prix_chambre AS 'PU',factures.total AS 'Total'\n" +
+"FROM clients INNER JOIN reservation ON clients.id_client = reservation.id_client INNER JOIN chambres On reservation.id_chambre = chambres.id_chambre \n" +
+"INNER JOIN factures ON factures.id_reservation = reservation.id_reservation WHERE reservation.id_reservation = 2;\n" +
+"\n" +
+"";
+            JRDesignQuery updateQuery = new JRDesignQuery();
+            updateQuery.setText(query);
+            jDesign.setQuery(updateQuery);            
+            JasperReport jreport = JasperCompileManager.compileReport(jDesign);
+            JasperPrint jprint = JasperFillManager.fillReport(jreport, null, conn);
+            JasperViewer.viewReport(jprint);
+       }catch(Exception e){
+           e.printStackTrace();
+       }
+       
+   }
+    public float getPrice(){
+        float result = 0;
+        try{
+            Connection conn= DbConnection.getConnection();
+            String sql = "SELECT chambres.prix_chambre * DATEDIFF(reservation.date_depart, reservation.date_arrivee) AS total FROM chambres JOIN reservation ON reservation.id_chambre = chambres.id_chambre WHERE id_reservation = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, txt_reserv.getText());
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                result = rs.getFloat("total");
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return result;
+    }
+    
+    public String getNom_client(){
+        String name = null;
+        try{
+            Connection conn= DbConnection.getConnection();
+            String sql = "SELECT nom_client FROM clients JOIN reservation ON reservation.id_client = clients.id_client WHERE id_reservation = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, txt_reserv.getText());
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                name = rs.getString("nom_client");
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return name;
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try(Connection conn =  DbConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement("INSERT INTO factures (id_reservation, nom_client, total) VALUES (?,?,?);")){
+            
+            stmt.setString(1, txt_reserv.getText());
+            stmt.setString(2,getNom_client());
+            stmt.setFloat(3, getPrice());
+            
+            int  rowsAffected = stmt.executeUpdate();
+            if(rowsAffected > 0){
+                JOptionPane.showMessageDialog(null, "Ajouté avec succès");
+                new Factures_view().tableFact();
+            }else{
+                JOptionPane.showMessageDialog(null,"Erreur lors de l'ajout");
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        total_label.setText("Total:"+getPrice());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel total_label;
+    private javax.swing.JTextField txt_reserv;
     // End of variables declaration//GEN-END:variables
 }

@@ -50,5 +50,22 @@ public class Bar_controller {
             System.out.println(e.getMessage());
         }
     }
+    
+    public String getClientName(String id) {
+        String result = "";
+        try (Connection conn = DbConnection.getConnection(); 
+                PreparedStatement stmt = conn.prepareStatement("SELECT nom_client, prenom_client  FROM clients WHERE id_client = ?;")) {
+
+            stmt.setString(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                result = rs.getString(1)+" "+rs.getString(2);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
+    }
 
 }

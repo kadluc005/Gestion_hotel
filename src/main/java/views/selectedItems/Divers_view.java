@@ -22,6 +22,7 @@ public class Divers_view extends javax.swing.JPanel {
     }
 
     private Bar_view bar;
+    private Restaurant_view restau;
             
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,7 +39,6 @@ public class Divers_view extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
         jLabel5.setText("Nom");
@@ -56,9 +56,8 @@ public class Divers_view extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 87, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(20, 52, 0, 0);
         add(jLabel1, gridBagConstraints);
 
         jButton1.setBackground(new java.awt.Color(51, 0, 0));
@@ -76,7 +75,7 @@ public class Divers_view extends javax.swing.JPanel {
         gridBagConstraints.ipadx = 62;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(208, 170, 247, 0);
+        gridBagConstraints.insets = new java.awt.Insets(208, 195, 248, 0);
         add(jButton1, gridBagConstraints);
 
         jButton2.setBackground(new java.awt.Color(51, 0, 0));
@@ -89,31 +88,13 @@ public class Divers_view extends javax.swing.JPanel {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 31;
         gridBagConstraints.ipady = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(208, 106, 247, 0);
+        gridBagConstraints.insets = new java.awt.Insets(208, 16, 248, 263);
         add(jButton2, gridBagConstraints);
-
-        jButton3.setBackground(new java.awt.Color(51, 0, 0));
-        jButton3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Piscine");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 54;
-        gridBagConstraints.ipady = 13;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(208, 67, 247, 186);
-        add(jButton3, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     
@@ -122,12 +103,9 @@ public class Divers_view extends javax.swing.JPanel {
         navigate(bar);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        restau = new Restaurant_view();
+        navigate(restau);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     
@@ -141,7 +119,6 @@ public class Divers_view extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jTextField4;

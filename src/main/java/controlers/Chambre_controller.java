@@ -17,12 +17,11 @@ public class Chambre_controller {
     
     public static void ajouterChambre(Chambre_model ch){
         try(Connection conn =  DbConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement("INSERT INTO chambres (type_chambre, localisation, situation_chambre, prix_chambre) VALUES (?,?,?,?);")){
+                PreparedStatement stmt = conn.prepareStatement("INSERT INTO chambres (type_chambre, situation_chambre, prix_chambre) VALUES (?,?,?);")){
             
             stmt.setString(1, ch.getType_chambre());
-            stmt.setString(2,ch.getLocalisation());
-            stmt.setString(3,ch.getSituation_chambre());
-            stmt.setFloat(4, ch.getPrix_chambre());
+            stmt.setString(2,ch.getSituation_chambre());
+            stmt.setFloat(3, ch.getPrix_chambre());
             
             int  rowsAffected = stmt.executeUpdate();
             if(rowsAffected > 0){
@@ -38,13 +37,12 @@ public class Chambre_controller {
 
     public static void modifierChambre(Chambre_model ch, String id_ch){
         try(Connection conn = DbConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement("UPDATE chambres SET type_chambre = ?, localisation = ?, situation_chambre = ?, prix_chambre = ? WHERE id_chambre = ?;")){
+                PreparedStatement stmt = conn.prepareStatement("UPDATE chambres SET type_chambre = ?, situation_chambre = ?, prix_chambre = ? WHERE id_chambre = ?;")){
             
             stmt.setString(1, ch.getType_chambre());
-            stmt.setString(2,ch.getLocalisation());
-            stmt.setString(3, ch.getSituation_chambre());
-            stmt.setFloat(4,ch.getPrix_chambre());
-            stmt.setString(5,id_ch);
+            stmt.setString(2, ch.getSituation_chambre());
+            stmt.setFloat(3,ch.getPrix_chambre());
+            stmt.setString(4,id_ch);
             
             
             int rowsAffected = 0;

@@ -9,6 +9,7 @@ import controlers.DbConnection;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import models.Client_model;
 
 /**
  *
@@ -46,6 +47,9 @@ public class Bar_view extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.GridBagLayout());
@@ -56,9 +60,9 @@ public class Bar_view extends javax.swing.JPanel {
         txt_total.setText("Total:");
         txt_total.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 12;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridx = 16;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 7;
         gridBagConstraints.ipadx = 85;
         gridBagConstraints.ipady = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -86,7 +90,7 @@ public class Bar_view extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 22;
@@ -111,7 +115,7 @@ public class Bar_view extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 16;
+        gridBagConstraints.gridwidth = 23;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 685;
         gridBagConstraints.ipady = 265;
@@ -132,7 +136,7 @@ public class Bar_view extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 42;
@@ -152,7 +156,8 @@ public class Bar_view extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 49;
         gridBagConstraints.ipady = 13;
@@ -168,7 +173,7 @@ public class Bar_view extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 142;
         gridBagConstraints.ipady = -1;
@@ -208,17 +213,50 @@ public class Bar_view extends javax.swing.JPanel {
         jTextField1.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         jTextField1.setText("Rechercher");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 6;
         gridBagConstraints.ipadx = 142;
         gridBagConstraints.ipady = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 98, 6, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 12, 5, 0);
         add(jTextField1, gridBagConstraints);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
+        jLabel4.setText("Quantité");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 18;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(17, 76, 0, 0);
+        add(jLabel4, gridBagConstraints);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
+        jLabel5.setText("ID client");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(17, 12, 0, 0);
+        add(jLabel5, gridBagConstraints);
+
+        jTextField2.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipadx = 33;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 6, 0, 0);
+        add(jTextField2, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    private float total = 0.0f;
+    private float total_boisson = 0.0f;
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //Récupérer l'identifiant dans le JTable
         int index = table_bar.getSelectedRow();
@@ -231,12 +269,15 @@ public class Bar_view extends javax.swing.JPanel {
         Bar_controller.updateQuantite(id, a);
         table_bar();
         float quantity = Float.parseFloat(String.valueOf(qte.getValue()));
-        total = total+ (price*quantity);
-        txt_total.setText("Total: "+total);
+        total_boisson = total_boisson+ (price*quantity);
+        txt_total.setText("Total: "+total_boisson);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        txt_total.setText("Total: ");
+        String a = new Bar_controller().getClientName("1");
+        System.out.println(a);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -251,7 +292,7 @@ public class Bar_view extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     public void table_bar(){
-        String []boisson={"Id","Libellé","Quantité disponible", "Prix"}; 
+        String []boisson={"Matricule","Libellé","Quantité disponible", "Prix"}; 
         String []afficher=new String[5];
 
         DefaultTableModel model=new DefaultTableModel(null,boisson);
@@ -273,6 +314,31 @@ public class Bar_view extends javax.swing.JPanel {
         }
     } 
     
+    public static void addCommand(Client_model cl){
+        String sql="INSERT INTO clients (nom_client, prenom_client, tel_client, pays_client, categorie_client, carte_fidelite) VALUES (?,?,?,?,?,?); ";
+        try(Connection conn = DbConnection.getConnection();
+                PreparedStatement stmt=conn.prepareStatement(sql)){
+            
+            stmt.setString(1,cl.getNom_client());
+            stmt.setString(2,cl.getPrenom_client());
+            stmt.setString(3,cl.getTel_client());
+            stmt.setString(4,cl.getPays_client());
+            stmt.setString(5,cl.getCategorie_client());
+            stmt.setString(6,cl.getCarte_fidelité());
+            
+            int rowsAffected=stmt.executeUpdate();
+          
+            if (rowsAffected>0){
+                JOptionPane.showMessageDialog(null,"Ajouté avec succès");
+            }else{
+                JOptionPane.showMessageDialog(null,"Erreur lors de l'ajout");
+            }
+            
+        }catch(Exception e){
+            System.out.println("Erreur lors de l'ajout "+e.getMessage());
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -280,8 +346,11 @@ public class Bar_view extends javax.swing.JPanel {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JSpinner qte;
     private javax.swing.JTable table_bar;
     private javax.swing.JLabel txt_total;

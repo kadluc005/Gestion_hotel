@@ -7,7 +7,6 @@ package views;
 import java.awt.Color;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import views.panels.EventMenuSelected;
 import views.selectedItems.*;
 
@@ -27,7 +26,8 @@ public class HomePage extends javax.swing.JFrame {
     private Reservation_view rsvt;
     private Paiement_view pmt;
     private Divers_view dvrs;
-    private Admin_view admin;
+    private Factures_view fact;
+    //private Admin_view admin;
     
     public HomePage() {
         initComponents();
@@ -38,42 +38,34 @@ public class HomePage extends javax.swing.JFrame {
         rsvt = new Reservation_view();
         pmt = new Paiement_view();
         dvrs = new Divers_view();
-        admin = new Admin_view();
+        fact = new Factures_view();
+        //admin = new Admin_view();
         //NavPanel.initMoving(HomePage.this);
         //this.setExtendedState(HomePage.MAXIMIZED_BOTH);
         navPanel.addEventMenuSelected(new EventMenuSelected(){
             @Override
             public void selected(int index) {
                 if(index == 0){
-                    
-                }else if(index == 1){
                     setForm(cl);
+                }else if(index == 1){
+                    setForm(ch);
                 }else if(index == 2){
-                    setForm(cha);
-                }else if(index == 3){
                     setForm(rsvt);
-                }else if(index == 4){
+                }else if(index == 3){
                     setForm(pmt);
+                }else if(index == 4){
+                    setForm(fact);
                 }else if(index == 5){
+                    //JPasswordField admin_mdp = new JPasswordField();
                     setForm(dvrs);
-                }else if(index == 6){
-                    JPasswordField admin_mdp = new JPasswordField();
-
-                    int option = JOptionPane.showConfirmDialog(null, admin_mdp, "Entrez le mot de passe administrateur", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-                    if(option == JOptionPane.OK_OPTION){
-                        if(admin_mdp.getText().equals("00")){
-                            setForm(admin);
-                        }else{
-                            JOptionPane.showMessageDialog(null, "Le mot de passe est erroné");
-                        }
-                    } 
+                     
                 }else if(index == 7){
                     int choix = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment vous déconnecter?", "Déconnexion", JOptionPane.YES_NO_OPTION);
                     if(choix == JOptionPane.YES_OPTION){
-                        /*HomePage.super.dispose();
+                        HomePage.super.dispose();
                         Login lg = new Login();
-                        lg.setVisible(true);*/
-                        System.exit(0);
+                        lg.setVisible(true);
+                        //System.exit(0);
                     }
                 }
             }
@@ -127,7 +119,7 @@ public class HomePage extends javax.swing.JFrame {
         );
         basePanel2Layout.setVerticalGroup(
             basePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
             .addComponent(navPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
         );
 

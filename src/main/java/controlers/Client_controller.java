@@ -7,6 +7,7 @@ package controlers;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import models.Client_model;
+import views.selectedItems.Client_view;
 
 /**
  *

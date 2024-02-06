@@ -33,12 +33,12 @@ public class NavPanel extends javax.swing.JPanel {
     }
 
     private void init(){
-        listNav1.addItem(new Nav_model("Home", "homeIcon.png", Nav_model.MenuType.MENU));
         listNav1.addItem(new Nav_model("Clients", "client.png", Nav_model.MenuType.MENU));
         listNav1.addItem(new Nav_model("Chambres", "room.png", Nav_model.MenuType.MENU));
         listNav1.addItem(new Nav_model("réservations", "reservation.png", Nav_model.MenuType.MENU));
         listNav1.addItem(new Nav_model("Paiement", "paiement.png", Nav_model.MenuType.MENU));
-        listNav1.addItem(new Nav_model("Divers", "eat.png", Nav_model.MenuType.MENU));
+        listNav1.addItem(new Nav_model("Factures", "facture.png", Nav_model.MenuType.MENU));
+        listNav1.addItem(new Nav_model("Autres services", "eat.png", Nav_model.MenuType.MENU));
         //listNav1.addItem(new Nav_model("Admin", "admin.png", Nav_model.MenuType.MENU));
         listNav1.addItem(new Nav_model("", "", Nav_model.MenuType.EMPTY));
         listNav1.addItem(new Nav_model("Se déconnecter", "", Nav_model.MenuType.MENU));

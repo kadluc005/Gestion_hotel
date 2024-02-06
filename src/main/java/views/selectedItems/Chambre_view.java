@@ -9,7 +9,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.*;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -90,7 +92,7 @@ public class Chambre_view extends javax.swing.JPanel {
     }//GEN-LAST:event_table_chMouseReleased
             
     public void tablech(){
-        String []chambres={"num","Type des chambre","Situation", "Prix"}; 
+        String []chambres={"Matricule","Type des chambre","Situation", "Prix"}; 
         String []afficher=new String[5];
 
         DefaultTableModel model=new DefaultTableModel(null,chambres);

@@ -4,6 +4,8 @@
  */
 package models;
 
+import java.sql.Blob;
+
 /**
  *
  * @author hp
@@ -75,5 +77,5 @@ public class Client_model {
     public void setCarte_fidelité(String carte_fidelité) {
         this.carte_fidelité = carte_fidelité;
     }
-    
+
 }
